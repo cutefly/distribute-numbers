@@ -7,14 +7,16 @@ public class HashToBase62 {
 
     // Base62 문자 집합
     private static final String BASE62 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    private static final String SECRET_KEY = "MySecretKey1234"; // 예측 방지를 위한 시크릿 키
     private static final Random RANDOM = new Random();
     
     // SHA-256 해시 후 Base62로 인코딩하는 함수
     public static String hashToBase62(int sequenceNumber) {
         try {
+            String input = SECRET_KEY + sequenceNumber;
             // 1. SHA-256 해시 생성
             MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] hash = md.digest(String.valueOf(sequenceNumber).getBytes());
+            byte[] hash = md.digest(String.valueOf(input).getBytes());
             
             // 2. 해시 결과를 16진수 문자열로 변환
             BigInteger decimalValue = new BigInteger(1, hash);
@@ -42,7 +44,7 @@ public class HashToBase62 {
     
     // 테스트 함수
     public static void main(String[] args) {
-        for (int i = 1; i <= 1000000; i++) {
+        for (int i = 1; i <= 10; i++) {
             hashToBase62(i);
             System.out.println(i + "\t" + hashToBase62(i));
         }
