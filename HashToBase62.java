@@ -32,7 +32,7 @@ public class HashToBase62 {
                 base62Str.append(BASE62.charAt(RANDOM.nextInt(BASE62.length())));
             }
             String finalValue = base62Str.substring(0, 8);
-            System.out.println(sequenceNumber + "\t" + processingValue + "\t" + finalValue);
+            // System.out.println(sequenceNumber + "\t" + processingValue + "\t" + finalValue);
             return base62Str.substring(0, 8);
 
         } catch (NoSuchAlgorithmException e) {
@@ -42,9 +42,9 @@ public class HashToBase62 {
     
     // 테스트 함수
     public static void main(String[] args) {
-        for (int i = 1; i <= 10000000; i++) {
+        for (int i = 1; i <= 1000000; i++) {
             hashToBase62(i);
-            // System.out.println(i + " -> " + hashToBase62(i));
+            System.out.println(i + "\t" + hashToBase62(i));
         }
     }
 }
